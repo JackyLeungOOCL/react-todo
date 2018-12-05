@@ -8,10 +8,25 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addNewTodo: newTodo => {
-    dispatch({
-      type: "ADDTODO",
-      payload: newTodo
-    });
+    const newTodoItem = {
+      content: newTodo,
+      status: "active"
+    }
+    fetch("https://todo-list-data-api.herokuapp.com/api/todos", {
+      method: 'POST', 
+      mode: 'cors', 
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }), 
+      body: JSON.stringify(newTodoItem)
+    })
+    .then(res => res.json())
+    .then(({id, status, content}) => {
+      dispatch({
+        type: "ADDTODO",
+        payload: {id, status, content}
+      })
+    })
   }
 })
 
