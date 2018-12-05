@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 import './Todos.css';
 
 export default class Todos extends Component {
-  addClass = (id) => {
-    const thisTodo = this.props.todos.find((todo) => todo.id === id);
-    return thisTodo.status === "active" ? "active-todo" : "inactive-todo";
+  addClass = (status) => {
+    return status === "active" ? "active-todo" : "inactive-todo";
   }
 
-  changeTodoStatus = (id) => {
-    this.props.dispatch({
-      type: "CHANGE_TODO_STATUS",
-      payload: id
-    })
-  }
+  // changeTodoStatus = (id) => {
+  //   this.props.dispatch({
+  //     type: "CHANGE_TODO_STATUS",
+  //     payload: id
+  //   })
+  // }
 
   render() {
     return (
       <div>
-        {this.props.todos.map((todo, i) => <li key={i} onClick={() => this.changeTodoStatus(todo.id)} className={this.addClass(todo.id)}>{todo.content}</li>)}
+        {this.props.todos.map((todo, i) => <li key={i} onClick={() => this.props.changeTodoStatus(todo.id, todo.status)} className={this.addClass(todo.status)}>{todo.content}</li>)}
       </div>
     )
   }
