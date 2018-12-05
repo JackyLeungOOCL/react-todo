@@ -11,6 +11,26 @@ export default (state = initialState, { type, payload }) => {
       todos: state.todos.concat(payload)
     }
 
+  case "CHANGE_TODO_STATUS":
+    return {
+      ...state,
+      todos: state.todos.map((todo) => {
+        if (todo.id === payload) {
+          if (todo.status === "active") {
+            return {
+              ...todo,
+              status: "inactive"
+            };
+          }
+          return {
+            ...todo,
+            status: "active"
+          };
+        }
+        return todo;
+      })
+    }
+
   default:
     return state
   }
