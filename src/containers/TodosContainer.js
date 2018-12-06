@@ -19,11 +19,17 @@ const mapDispatchToProps = dispatch => ({
       body: JSON.stringify(changeTodoItemStatus(status))
     })
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(dispatch({
       type: "CHANGE_TODO_STATUS",
       payload: id
     }))
+  },
+
+  filterActive: () => {
+    dispatch({
+      type: "UPDATE_SHOW_ACTIVE",
+      payload: ''
+    })
   }
 });
 

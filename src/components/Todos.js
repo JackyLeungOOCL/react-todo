@@ -6,17 +6,34 @@ export default class Todos extends Component {
     return status === "active" ? "active-todo" : "inactive-todo";
   }
 
-  // changeTodoStatus = (id) => {
-  //   this.props.dispatch({
-  //     type: "CHANGE_TODO_STATUS",
-  //     payload: id
-  //   })
-  // }
+  filterTodos = (checked) => {
+    return
+  }
 
   render() {
     return (
       <div>
-        {this.props.todos.map((todo, i) => <li key={i} onClick={() => this.props.changeTodoStatus(todo.id, todo.status)} className={this.addClass(todo.status)}>{todo.content}</li>)}
+        <div>
+          {
+            this.props.todos
+              .filter((todo) => 
+                (todo.status === "active" || !this.refs.checkbox.checked)
+              )
+              .map((todo, i) => 
+                <li key={i} 
+                  onClick={() => this.props.changeTodoStatus(todo.id, todo.status)} 
+                  className={this.addClass(todo.status)}
+                >
+                  {todo.content}
+                </li>)
+          }
+        </div>
+        <input 
+          ref="checkbox"
+          type="checkbox" 
+          onChange={this.props.filterActive}
+        />
+          Only Show active
       </div>
     )
   }
