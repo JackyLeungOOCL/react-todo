@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import './Todos.css';
 
 export default class Todos extends Component {
-  addClass = (status) => {
-    return status === "active" ? "active-todo" : "inactive-todo";
+  constructor(props) {
+    super(props);
+    this.props.initTodos();
   }
 
-  filterTodos = (checked) => {
-    return
+  addClass = (status) => {
+    return status === "active" ? "active-todo" : "inactive-todo";
   }
 
   render() {

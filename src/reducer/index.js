@@ -5,6 +5,12 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
 
+  case "INIT_TODO":
+    return {
+      ...state,
+      todos: payload
+    }
+
   case "ADDTODO":
     return {
       ...state,
@@ -32,7 +38,6 @@ export default (state = initialState, { type, payload }) => {
     }
 
   case "UPDATE_SHOW_ACTIVE":
-  console.log(state === {...state})
     return {
       ...state,
       todos: state.todos.concat()

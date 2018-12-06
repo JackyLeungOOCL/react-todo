@@ -6,6 +6,19 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  initTodos: () => {
+    fetch("https://todo-list-data-api.herokuapp.com/api/todos/", {
+      mode: 'cors'
+    })
+    .then(res => res.json())
+    .then(res => {
+      dispatch({
+        type: "INIT_TODO",
+        payload: res._embedded.todos
+      })
+    })
+  },
+
   changeTodoStatus: (id, status) => {
     const changeTodoItemStatus = (status) => {
       return status === "active" ? {status: "inactive"} : {status: "active"};
